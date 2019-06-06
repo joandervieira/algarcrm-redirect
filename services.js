@@ -65,13 +65,16 @@ const getContexts = (path) => {
               if(!!_resource.resource) {                  
                 _resource.resource.map((res) => {
                   if(!!res['$'] && !!res['$']['local-context']) {
-                    if(res['$']['local-context'] === '/scripts') {
+                    var localContext = res['$']['local-context'];
+                    if(localContext === '/scripts' || localContext === '/views') {
                       var _contex = res['$']['web-context'];
                       var contextName = _contex.substring(
                         _contex.lastIndexOf('/modules/'), 
-                        _contex.lastIndexOf('/scripts'));
-                        
-                      contexts.push(contextName);  
+                        _contex.lastIndexOf(localContext));
+
+                      if(contexts.indexOf(contextName) === -1) {
+                        contexts.push(contextName);
+                      }                                                
                     }
                   } 
                 });                  
@@ -136,14 +139,29 @@ const createAppContext = (app, _app) => {
     });
   }  
 }
+
+const createCrmWebContext = (app) => {
+  
+  const crmWebApp = express() // the sub app
+  
+  crmWebApp.use(express.static(process.env.ALGARCRM_WORKSPACE  + `/source/algarcrm-all/crm-web/target/crm`));
+  
+  console.log(chalk.blue(`Creating app context /crm/local`));
+
+  app.use(`/crm/local`, crmWebApp);
+}
   
 module.exports.create = (app, callback) => {
+
+    //CRM-WEB
+    createCrmWebContext(app);
+
     if (existsSync('apps.json')) {
         _readFile('apps.json')
         .then((file) => {
             apps = JSON.parse(file);       
-            apps.map((_app) => {            
-            createAppContext(app, _app);
+            apps.map((_app) => {         
+              createAppContext(app, _app);
             });
             callback();
         });
