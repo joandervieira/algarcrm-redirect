@@ -1,0 +1,48 @@
+[
+  {
+    "creationDate": 1559567048663,
+    "description": "",
+    "groupId": "",
+    "id": "Replace_1559567048663",
+    "name": "Redirect algarcrm to local",
+    "objectType": "rule",
+    "pairs": [
+      {
+        "from": "http://localhost:8080/crm/resources",
+        "source": {
+          "filters": {},
+          "key": "Url",
+          "operator": "Matches",
+          "value": "/(.js$|.json$|.html$|.ftl$|.png$|.jpg$|.svg$|.gif$)/g"
+        },
+        "status": "Inactive",
+        "to": "http://localhost:5000/crm/resources"
+      },
+      {
+        "from": "http://localhost:8080/crm/scripts",
+        "source": {
+          "filters": {},
+          "key": "Url",
+          "operator": "Matches",
+          "value": "/(.js$|.json$|.html$|.ftl$|.png$|.jpg$|.svg$|.gif$)/g"
+        },
+        "status": "Inactive",
+        "to": "http://localhost:5000/crm/local/scripts"
+      },
+      {
+        "from": "http://localhost:8080/crm/images",
+        "source": {
+          "filters": {},
+          "key": "Url",
+          "operator": "Matches",
+          "value": "/(.png$|.jpg$|.svg$|.gif$)/g"
+        },
+        "status": "Inactive",
+        "to": "http://localhost:5000/crm/local/images"
+      }
+    ],
+    "ruleType": "Replace",
+    "status": "Active",
+    "version": 2
+  }
+]
