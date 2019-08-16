@@ -1,6 +1,6 @@
 # algarcrm-redirect
   
-## Instalation
+## Installation
 
     $ npm i
 
