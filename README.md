@@ -2,7 +2,7 @@
   
 ## Instalation
 
-$ npm i
+    $ npm i
 
 ## Configuration
  
