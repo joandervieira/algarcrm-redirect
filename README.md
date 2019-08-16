@@ -1,5 +1,9 @@
 # algarcrm-redirect
   
+## Instalation
+
+$ npm i
+
 ## Configuration
  
 Set environment ALGARCRM_WORKSPACE to find folders algarcrm
@@ -8,5 +12,5 @@ Set environment ALGARCRM_WORKSPACE to find folders algarcrm
 
 ## Run
 
-    $ node app.js
+    $ node app
 	 	  	
